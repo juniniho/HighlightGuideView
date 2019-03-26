@@ -11,7 +11,7 @@ import android.widget.RelativeLayout;
  */
 public class HighlightUtil {
 
-    private HighlightGuideView mGuideView;
+    public HighlightGuideView mGuideView;
     private Context context;
     private ViewGroup mAnchor;
     private View target;
@@ -41,14 +41,9 @@ public class HighlightUtil {
             frameLayout.addView(mAnchor, lp);
 
             frameLayout.addView(mGuideView);
+
         }
 
-        mGuideView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                remove();
-            }
-        });
 
     }
 

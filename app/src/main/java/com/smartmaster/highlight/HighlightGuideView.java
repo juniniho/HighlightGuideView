@@ -7,9 +7,11 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +35,8 @@ public class HighlightGuideView extends FrameLayout {
     private ViewGroup mParent;
     private View mTargetView;
     private LayoutInflater mInflater;
+
+    private RectF mRectF;
 
     private static final PorterDuffXfermode MODE_DST_OUT = new PorterDuffXfermode(PorterDuff.Mode.DST_OUT);
 
@@ -62,8 +66,8 @@ public class HighlightGuideView extends FrameLayout {
 
         recycleBitmap(mLightBitmap);
         mLightBitmap = Bitmap.createBitmap(getMeasuredWidth(), getMeasuredHeight(), Bitmap.Config.ARGB_4444);
-
-        drawCircleShape(mLightBitmap,new RectF(ViewUtils.getLocationInView(mParent,mTargetView)));
+        mRectF = new RectF(ViewUtils.getLocationInView(mParent,mTargetView));
+        drawCircleShape(mLightBitmap,mRectF);
         canvas.drawBitmap(mLightBitmap, 0, 0, mPaint);
     }
 
@@ -132,19 +136,32 @@ public class HighlightGuideView extends FrameLayout {
         }
     }
 
-    private void addTipView(int layoutId){
+    public void addTipView(int layoutId){
         View view = mInflater.inflate(layoutId, this, false);
-        LayoutParams lp = (LayoutParams) view.getLayoutParams();
+        LayoutParams lp = new LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
 
-        if (lp == null) return;
 
         lp.leftMargin = (int) 20;
-        lp.topMargin = (int) 20;
+        lp.topMargin = (int) (mRectF.top + mRectF.width());
         lp.rightMargin = 0;
         lp.bottomMargin = 0;
         addView(view,lp);
 
     }
+
+    public void addBottomView(int layoutId,OnClickListener onClickListener){
+        View view = mInflater.inflate(layoutId, this, false);
+        LayoutParams lp = new LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+        lp.leftMargin = 0;
+        lp.topMargin = 0;
+        lp.rightMargin = 0;
+        lp.bottomMargin = 60;
+        lp.gravity = Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL;
+        view.setOnClickListener(onClickListener);
+        addView(view,lp);
+    }
+
+
 
 
 
