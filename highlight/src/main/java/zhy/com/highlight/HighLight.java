@@ -19,7 +19,7 @@ import java.util.List;
 
 import zhy.com.highlight.interfaces.HighLightInterface;
 import zhy.com.highlight.shape.RectLightShape;
-import zhy.com.highlight.util.ViewUtils;
+import zhy.com.highlight.util.ViewTools;
 import zhy.com.highlight.view.HightLightView;
 
 /**
@@ -126,7 +126,7 @@ public class HighLight implements HighLightInterface, ViewTreeObserver.OnGlobalL
         ViewGroup parent = (ViewGroup) mAnchor;
         for (HighLight.ViewPosInfo viewPosInfo : mViewRects) {
 
-            RectF rect = new RectF(ViewUtils.getLocationInView(parent, viewPosInfo.view));
+            RectF rect = new RectF(ViewTools.getLocationInView(parent, viewPosInfo.view));
 //            if (!rect.equals(viewPosInfo.rectF))//TODO bug dismissed...fc...
             {
                 viewPosInfo.rectF = rect;
@@ -142,7 +142,7 @@ public class HighLight implements HighLightInterface, ViewTreeObserver.OnGlobalL
             throw new IllegalArgumentException("onPosCallback can not be null.");
         }
         ViewGroup parent = (ViewGroup) mAnchor;
-        RectF rect = new RectF(ViewUtils.getLocationInView(parent, view));
+        RectF rect = new RectF(ViewTools.getLocationInView(parent, view));
         //if RectF is empty return  added by isanwenyu 2016/10/26.
         if (rect.isEmpty()) return this;
         ViewPosInfo viewPosInfo = new ViewPosInfo();

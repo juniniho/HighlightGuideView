@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import zhy.com.highlight.util.ViewUtils;
+import zhy.com.highlight.util.ViewTools;
 
 /**
  * 高亮引导view
@@ -71,7 +71,7 @@ public class HighlightGuideView extends FrameLayout {
 
         recycleBitmap(mLightBitmap);
         mLightBitmap = Bitmap.createBitmap(getMeasuredWidth(), getMeasuredHeight(), Bitmap.Config.ARGB_4444);
-        mRectF = new RectF(ViewUtils.getLocationInView(mParent,mTargetView));
+        mRectF = new RectF(ViewTools.getLocationInView(mParent,mTargetView));
         drawCircleShape(mLightBitmap,mRectF);
         canvas.drawBitmap(mLightBitmap, 0, 0, mPaint);
     }

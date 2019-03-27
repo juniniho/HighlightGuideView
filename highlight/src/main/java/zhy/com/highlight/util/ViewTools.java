@@ -9,7 +9,7 @@ import android.view.View;
 /**
  * Created by zhy on 15/10/8.
  */
-public class ViewUtils
+public class ViewTools
 {
     private static final String FRAGMENT_CON = "NoSaveStateFrameLayout";
 
