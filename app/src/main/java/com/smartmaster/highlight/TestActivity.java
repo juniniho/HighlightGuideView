@@ -43,16 +43,16 @@ public class TestActivity extends Activity {
     }
 
     private void showGuide(){
-        final HighlightUtil highlightUtil = new HighlightUtil(this,ll_root,btn);
-        highlightUtil.show();
-        highlightUtil.mGuideView.post(new Runnable() {
+        final HighlightHelper highlightHelper = new HighlightHelper(this,ll_root,btn);
+        highlightHelper.show();
+        highlightHelper.mGuideView.post(new Runnable() {
             @Override
             public void run() {
-                highlightUtil.mGuideView.addTipView(R.layout.view_init_data_tip,- HighlightGuideView.dp2px(TestActivity.this,14));
-                highlightUtil.mGuideView.addBottomView(R.layout.guide_tip_view_complete, new View.OnClickListener() {
+                highlightHelper.mGuideView.addTipView(R.layout.view_init_data_tip,- HighlightGuideView.dp2px(TestActivity.this,14));
+                highlightHelper.mGuideView.addBottomView(R.layout.guide_tip_view_complete, new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        highlightUtil.remove();
+                        highlightHelper.remove();
                     }
                 });
 

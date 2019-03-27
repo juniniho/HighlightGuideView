@@ -9,14 +9,14 @@ import android.widget.RelativeLayout;
 /**
  * Created by ychen on 2019/3/26.
  */
-public class HighlightUtil {
+public class HighlightHelper {
 
     public HighlightGuideView mGuideView;
     private Context context;
     private ViewGroup mAnchor;
     private View target;
 
-    public HighlightUtil(Context context, ViewGroup mAnchor, View target) {
+    public HighlightHelper(Context context, ViewGroup mAnchor, View target) {
         this.context = context;
         this.mAnchor = mAnchor;
         this.target = target;
