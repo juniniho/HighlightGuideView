@@ -29,19 +29,20 @@ public class HighlightGuideView extends FrameLayout {
 
     protected float blurRadius=15;//模糊半径 默认15
 
-    private View mParent;
+    private View mAnchor;
     private View mTargetView;
     private LayoutInflater mInflater;
 
     private RectF mRectF;
+    private float mRadius;
 
     private static final PorterDuffXfermode MODE_DST_OUT = new PorterDuffXfermode(PorterDuff.Mode.DST_OUT);
 
-    public HighlightGuideView(@NonNull Context context,View parent,View targetView) {
+    public HighlightGuideView(@NonNull Context context, View anchor, View targetView) {
         super(context);
         mInflater = LayoutInflater.from(context);
         this.mTargetView = targetView;
-        this.mParent = parent;
+        this.mAnchor = anchor;
         setWillNotDraw(false);
         init();
         //屏蔽遮罩下页面点击
@@ -70,7 +71,7 @@ public class HighlightGuideView extends FrameLayout {
 
         recycleBitmap(mLightBitmap);
         mLightBitmap = Bitmap.createBitmap(getMeasuredWidth(), getMeasuredHeight(), Bitmap.Config.ARGB_4444);
-        mRectF = new RectF(ViewTools.getLocationInView(mParent,mTargetView));
+        mRectF = new RectF(ViewTools.getLocationInView(mAnchor,mTargetView));
         drawCircleShape(mLightBitmap,mRectF);
         canvas.drawBitmap(mLightBitmap, 0, 0, mPaint);
     }
@@ -122,8 +123,9 @@ public class HighlightGuideView extends FrameLayout {
             paint.setMaskFilter(new BlurMaskFilter(blurRadius, BlurMaskFilter.Blur.SOLID));
         }
 
+        mRadius = (float) (Math.sqrt(Math.pow(rectF.width(),2) + Math.pow(rectF.height(),2))/2) + dp2px(getContext(),1);
         canvas.drawCircle(rectF.left+(rectF.width()/2),rectF.top+(rectF.height()/2),
-                Math.max(rectF.width(),rectF.height())/2,paint);
+                mRadius,paint);
 
     }
 
@@ -150,22 +152,22 @@ public class HighlightGuideView extends FrameLayout {
         LayoutParams lp = new LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
 
 
-        lp.leftMargin = (int) (mRectF.width()/2 + leftMarginOffset);
-        lp.topMargin = (int) (mRectF.top + mRectF.height()/2 + mRectF.width()/2 + dp2px(getContext(),5));
+        lp.leftMargin = (int) (mRectF.left + mRectF.width()/2 + leftMarginOffset);
+        lp.topMargin = (int) (mRectF.top + mRectF.height()/2 + mRadius + dp2px(getContext(),5));
         lp.rightMargin = 0;
         lp.bottomMargin = 0;
         addView(view,lp);
 
     }
 
-    public void addBottomView(int layoutId,OnClickListener onClickListener){
+    public void addBottomView(int layoutId, OnClickListener onClickListener){
         View view = mInflater.inflate(layoutId, this, false);
         LayoutParams lp = new LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
         lp.leftMargin = 0;
         lp.topMargin = 0;
         lp.rightMargin = 0;
         lp.bottomMargin = dp2px(getContext(),88);
-        lp.gravity = Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL;
+        lp.gravity = Gravity.BOTTOM| Gravity.CENTER_HORIZONTAL;
         view.setOnClickListener(onClickListener);
         addView(view,lp);
     }
@@ -173,7 +175,7 @@ public class HighlightGuideView extends FrameLayout {
     /**
      * dp转换成px
      */
-    public static int dp2px(Context context,float dpValue){
+    public static int dp2px(Context context, float dpValue){
         float scale=context.getResources().getDisplayMetrics().density;
         return (int)(dpValue*scale+0.5f);
     }
