@@ -45,6 +45,13 @@ public class HighlightGuideView extends FrameLayout {
         this.mParent = parent;
         setWillNotDraw(false);
         init();
+        //屏蔽遮罩下页面点击
+        setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     private void init() {

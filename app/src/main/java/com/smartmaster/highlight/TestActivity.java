@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.zhy.highlight.R;
 
@@ -35,6 +36,10 @@ public class TestActivity extends Activity {
 
 
 
+    }
+
+    public void onClickBt2(View view){
+        Toast.makeText(getApplicationContext(),"clickBt2",Toast.LENGTH_SHORT).show();
     }
 
     private void showGuide(){
