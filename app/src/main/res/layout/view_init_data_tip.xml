@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <com.github.library.bubbleview.BubbleTextView
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:text="您录入信息的进度可在这里查看点击展开“目录”"
+        android:padding="18dp"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        app:arrowWidth="8dp"
+        app:angle="2dp"
+        app:arrowHeight="6dp"
+        app:arrowPosition="10dp"
+        app:arrowLocation="top"
+        app:arrowCenter="false"
+        app:bubbleColor="#3B82EE"
+        android:lineSpacingExtra="6dp"
+        />
+</LinearLayout>

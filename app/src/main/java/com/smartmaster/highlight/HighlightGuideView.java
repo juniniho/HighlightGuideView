@@ -7,10 +7,8 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
 import android.graphics.RectF;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -141,8 +139,8 @@ public class HighlightGuideView extends FrameLayout {
         LayoutParams lp = new LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
 
 
-        lp.leftMargin = (int) 20;
-        lp.topMargin = (int) (mRectF.top + mRectF.width());
+        lp.leftMargin = (int) mRectF.width()/2 - dp2px(getContext(),14);
+        lp.topMargin = (int) (mRectF.top + mRectF.height()/2 + mRectF.width()/2 + dp2px(getContext(),5));
         lp.rightMargin = 0;
         lp.bottomMargin = 0;
         addView(view,lp);
@@ -155,11 +153,20 @@ public class HighlightGuideView extends FrameLayout {
         lp.leftMargin = 0;
         lp.topMargin = 0;
         lp.rightMargin = 0;
-        lp.bottomMargin = 60;
+        lp.bottomMargin = dp2px(getContext(),88);
         lp.gravity = Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL;
         view.setOnClickListener(onClickListener);
         addView(view,lp);
     }
+
+    /**
+     * dp转换成px
+     */
+    private int dp2px(Context context,float dpValue){
+        float scale=context.getResources().getDisplayMetrics().density;
+        return (int)(dpValue*scale+0.5f);
+    }
+
 
 
 
