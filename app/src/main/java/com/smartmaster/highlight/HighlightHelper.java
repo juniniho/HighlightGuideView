@@ -1,5 +1,6 @@
 package com.smartmaster.highlight;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +14,21 @@ public class HighlightHelper {
 
     public HighlightGuideView mGuideView;
     private Context context;
-    private ViewGroup mAnchor;
-    private View target;
+    private View mAnchor;
 
-    public HighlightHelper(Context context, ViewGroup mAnchor, View target) {
+    /**
+     * 在activity上anchor传null
+     * @param context
+     * @param anchor
+     * @param target
+     */
+    public HighlightHelper(Context context, View anchor, View target) {
         this.context = context;
-        this.mAnchor = mAnchor;
-        this.target = target;
+        if(anchor == null){
+            this.mAnchor = ((Activity) context).findViewById(android.R.id.content);
+        }else {
+            this.mAnchor = anchor;
+        }
         HighlightGuideView hightLightView = new HighlightGuideView(context,mAnchor,target);
         mGuideView = hightLightView;
     }

@@ -43,7 +43,7 @@ public class TestActivity extends Activity {
     }
 
     private void showGuide(){
-        final HighlightHelper highlightHelper = new HighlightHelper(this,ll_root,btn);
+        final HighlightHelper highlightHelper = new HighlightHelper(this,null,btn);
         highlightHelper.show();
         highlightHelper.mGuideView.post(new Runnable() {
             @Override

@@ -12,7 +12,6 @@ import android.support.annotation.NonNull;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import zhy.com.highlight.util.ViewTools;
@@ -30,7 +29,7 @@ public class HighlightGuideView extends FrameLayout {
 
     protected float blurRadius=15;//模糊半径 默认15
 
-    private ViewGroup mParent;
+    private View mParent;
     private View mTargetView;
     private LayoutInflater mInflater;
 
@@ -38,7 +37,7 @@ public class HighlightGuideView extends FrameLayout {
 
     private static final PorterDuffXfermode MODE_DST_OUT = new PorterDuffXfermode(PorterDuff.Mode.DST_OUT);
 
-    public HighlightGuideView(@NonNull Context context,ViewGroup parent,View targetView) {
+    public HighlightGuideView(@NonNull Context context,View parent,View targetView) {
         super(context);
         mInflater = LayoutInflater.from(context);
         this.mTargetView = targetView;
