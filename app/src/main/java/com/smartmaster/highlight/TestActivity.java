@@ -48,7 +48,7 @@ public class TestActivity extends Activity {
         highlightUtil.mGuideView.post(new Runnable() {
             @Override
             public void run() {
-                highlightUtil.mGuideView.addTipView(R.layout.view_init_data_tip);
+                highlightUtil.mGuideView.addTipView(R.layout.view_init_data_tip,- HighlightGuideView.dp2px(TestActivity.this,14));
                 highlightUtil.mGuideView.addBottomView(R.layout.guide_tip_view_complete, new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

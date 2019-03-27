@@ -141,12 +141,17 @@ public class HighlightGuideView extends FrameLayout {
         }
     }
 
-    public void addTipView(int layoutId){
+    /**
+     * 添加提示框view
+     * @param layoutId
+     * @param leftMarginOffset 默认左对齐圆心，top离圆底部5dp
+     */
+    public void addTipView(int layoutId,int leftMarginOffset){
         View view = mInflater.inflate(layoutId, this, false);
         LayoutParams lp = new LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
 
 
-        lp.leftMargin = (int) mRectF.width()/2 - dp2px(getContext(),14);
+        lp.leftMargin = (int) (mRectF.width()/2 + leftMarginOffset);
         lp.topMargin = (int) (mRectF.top + mRectF.height()/2 + mRectF.width()/2 + dp2px(getContext(),5));
         lp.rightMargin = 0;
         lp.bottomMargin = 0;
@@ -169,7 +174,7 @@ public class HighlightGuideView extends FrameLayout {
     /**
      * dp转换成px
      */
-    private int dp2px(Context context,float dpValue){
+    public static int dp2px(Context context,float dpValue){
         float scale=context.getResources().getDisplayMetrics().density;
         return (int)(dpValue*scale+0.5f);
     }
